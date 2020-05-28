@@ -1,0 +1,21 @@
+int Sensor = A0;
+int analogValue;
+void setup() {
+    pinMode(Sensor, INPUT);
+}
+
+void loop() {
+    analogValue = analogRead(Sensor);
+    String intensity = String (analogValue);
+    if (analogValue > 10)
+    {
+            Particle.publish("sun" , "Nolight" , PRIVATE);
+    }
+    else 
+    {
+            Particle.publish("sun" , "Hits" ,PRIVATE);
+    }
+    Particle.publish("intensity", intensity, PRIVATE);
+
+    delay(5000);
+}
